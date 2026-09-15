@@ -5,4 +5,4 @@ st.set_page_config(page_title="Whisper",page_icon="🎀",layout="wide", initial_
 
 prompt= st.chat_input("You are welcome to ask any question, this is a safe space")
 if prompt:
-  st.write(f"User has sent the following prompt:{prompt}")
+  st.write(f"User has sent the following prompt: {prompt}")
