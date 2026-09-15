@@ -1,4 +1,3 @@
 import streamlit as st
 st.title("Welcome to Whisper Circle")
-st.write("I hope i stop getting errors")
-st.write("salma")
+st.write("Testing again")
