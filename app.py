@@ -14,26 +14,15 @@ st.set_page_config(
 # ---------- STYLING ----------
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap');
 
     html, body, [class*="css"] {
         font-family: 'Nunito', sans-serif;
     }
 
-    /* Catch every outer wrapper layer so no dark strip is left unpainted */
-    html, body,
-    .stApp,
-    [data-testid="stAppViewContainer"],
-    [data-testid="stMain"],
-    [data-testid="stMainBlockContainer"],
-    [data-testid="stBottom"],
-    [data-testid="stBottomBlockContainer"],
-    [data-testid="stHeader"] {
-        background: #FFF8FA !important;
-    }
-
+    /* Force background colors */
     .stApp {
-        background:
+        background: 
             radial-gradient(circle at 12% 8%, rgba(245, 198, 214, 0.55) 0%, transparent 40%),
             radial-gradient(circle at 90% 15%, rgba(232, 116, 154, 0.18) 0%, transparent 45%),
             radial-gradient(circle at 50% 100%, rgba(217, 168, 87, 0.10) 0%, transparent 50%),
@@ -43,50 +32,54 @@ st.markdown("""
     [data-testid="stHeader"] {
         box-shadow: none !important;
         border-bottom: none !important;
+        background: transparent !important;
     }
 
-    /* Logo + title, side by side */
+    /* Amplified Logo + Title */
     .whisper-header {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 14px;
+        gap: 18px;
         margin-top: 10px;
     }
 
     .whisper-logo {
-        width: 54px;
-        height: 54px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
         background: linear-gradient(135deg, #FBE4EC, #F3B6C8);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 26px;
-        box-shadow: 0 3px 10px rgba(201, 82, 122, 0.20);
+        font-size: 42px;
+        box-shadow: 0 4px 15px rgba(201, 82, 122, 0.25);
         flex-shrink: 0;
     }
 
     .whisper-header h1 {
         font-family: 'Fredoka', sans-serif !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
+        font-size: 3.5rem !important;
         color: #C9527A !important;
         margin: 0 !important;
-        letter-spacing: -0.5px;
+        letter-spacing: -1px;
     }
 
+    /* Unique Tagline Font */
     .whisper-tagline {
         text-align: center;
+        font-family: 'Caveat', cursive !important;
         color: #A9738A;
         font-weight: 600;
-        font-size: 15px;
-        margin-top: 4px;
+        font-size: 28px;
+        margin-top: -5px;
         margin-bottom: 22px;
     }
 
     .whisper-divider {
-        height: 3px;
-        width: 64px;
+        height: 4px;
+        width: 80px;
         margin: 0 auto 30px auto;
         background: linear-gradient(90deg, #F0AFC4, #E8749A, #F0AFC4);
         border-radius: 4px;
@@ -102,10 +95,9 @@ st.markdown("""
         box-shadow: 0 3px 10px rgba(201, 82, 122, 0.06);
     }
 
-    /* Force readable text color inside bubbles — this was the white-on-white bug */
-    [data-testid="stChatMessage"] p,
-    [data-testid="stChatMessage"] li,
-    [data-testid="stChatMessage"] span,
+    [data-testid="stChatMessage"] p, 
+    [data-testid="stChatMessage"] li, 
+    [data-testid="stChatMessage"] span, 
     [data-testid="stChatMessage"] div {
         color: #5A3547 !important;
     }
@@ -119,15 +111,17 @@ st.markdown("""
         border: 1px solid #F5C6D6 !important;
     }
 
-    /* Chat input */
+    /* Clean Chat Input */
     [data-testid="stChatInput"] {
         border-radius: 26px !important;
-        border: 1.5px solid #F3C3D5 !important;
+        border: 2px solid #F3C3D5 !important;
         box-shadow: 0 4px 14px rgba(201, 82, 122, 0.10) !important;
+        background-color: #FFFFFF !important;
     }
 
     [data-testid="stChatInput"] textarea {
         color: #5A3547 !important;
+        background-color: transparent !important;
     }
 
     [data-testid="stChatInput"] textarea::placeholder {
@@ -147,14 +141,13 @@ st.markdown("""
         font-weight: 700;
     }
 
-    /* Expander (sources list) */
+    /* Expander */
     [data-testid="stExpander"] {
         border: 1px solid #F5C6D6 !important;
         border-radius: 14px !important;
         background-color: #FFFBFC !important;
     }
 
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-thumb { background: #F3C3D5; border-radius: 8px; }
     </style>
