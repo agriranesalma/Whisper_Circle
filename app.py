@@ -1,5 +1,5 @@
 import streamlit as st
-from groq import Groq
+from grok import Grok
 
 st.set_page_config(page_title="Whisper", page_icon="🎀", layout="wide", initial_sidebar_state="collapsed")
 st.title("Welcome to Whisper Circle")
