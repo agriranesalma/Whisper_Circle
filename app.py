@@ -6,7 +6,7 @@ st.title("Welcome to Whisper Circle")
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
 if "groq_model" not in st.session_state:
-    st.session_state["groq_model"] = "llama-3.1-8b-instant"
+    st.session_state["groq_model"] = "openai/gpt-oss-20b"
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
