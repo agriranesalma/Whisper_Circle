@@ -3,6 +3,7 @@ from groq import Groq
 import chromadb
 import glob
 import os
+import re
 
 st.set_page_config(
     page_title="Whisper Circle",
@@ -66,13 +67,12 @@ st.markdown("""
         letter-spacing: -1px;
     }
 
-    /* Unique Tagline Font */
     .whisper-tagline {
         text-align: center;
         font-family: 'Caveat', cursive !important;
         color: #A9738A;
         font-weight: 600;
-        font-size: 28px;
+        font-size: 36px; /* Increased for better visibility */
         margin-top: -5px;
         margin-bottom: 22px;
     }
@@ -186,12 +186,24 @@ def get_collection():
         for filepath in glob.glob("data/*.md"):
             with open(filepath, "r", encoding="utf-8") as f:
                 content = f.read()
+            
+            # Split the file by the "---" separator
             chunks = [c.strip() for c in content.split("---") if c.strip()]
+            
             for chunk in chunks:
                 all_chunks.append(chunk)
-                all_metadatas.append({"source": os.path.basename(filepath)})
+                
+                # Search for the source link in the chunk
+                url_match = re.search(r'Source:\s*(https?://[^\s]+)', chunk)
+                if url_match:
+                    actual_source = url_match.group(1)
+                else:
+                    actual_source = os.path.basename(filepath) # Fallback if no link is found
+                
+                all_metadatas.append({"source": actual_source})
                 all_ids.append(f"doc_{chunk_id}")
                 chunk_id += 1
+                
         if all_chunks:
             collection.upsert(documents=all_chunks, metadatas=all_metadatas, ids=all_ids)
 
