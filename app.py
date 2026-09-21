@@ -217,7 +217,7 @@ Context:
                 st.caption(src)
 
     st.session_state.messages.append({"role": "assistant", "content": response})
-                content = f.read()
+            content = f.read()
             chunks = [c.strip() for c in content.split("---") if c.strip()]
             for chunk in chunks:
                 all_chunks.append(chunk)
