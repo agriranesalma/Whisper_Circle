@@ -20,31 +20,59 @@ st.markdown("""
         font-family: 'Nunito', sans-serif;
     }
 
+    /* Catch every outer wrapper layer so no dark strip is left unpainted */
+    html, body,
+    .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"],
+    [data-testid="stMainBlockContainer"],
+    [data-testid="stBottom"],
+    [data-testid="stBottomBlockContainer"],
+    [data-testid="stHeader"] {
+        background: #FFF8FA !important;
+    }
+
     .stApp {
         background:
             radial-gradient(circle at 12% 8%, rgba(245, 198, 214, 0.55) 0%, transparent 40%),
             radial-gradient(circle at 90% 15%, rgba(232, 116, 154, 0.18) 0%, transparent 45%),
             radial-gradient(circle at 50% 100%, rgba(217, 168, 87, 0.10) 0%, transparent 50%),
-            #FFF8FA;
+            #FFF8FA !important;
     }
 
-    /* Fix: top toolbar and bottom input bar are separate containers */
     [data-testid="stHeader"] {
-        background: transparent !important;
+        box-shadow: none !important;
+        border-bottom: none !important;
     }
 
-    [data-testid="stBottomBlockContainer"],
-    [data-testid="stBottom"] {
-        background: #FFF8FA !important;
+    /* Logo + title, side by side */
+    .whisper-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 10px;
     }
 
-    h1 {
+    .whisper-logo {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #FBE4EC, #F3B6C8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        box-shadow: 0 3px 10px rgba(201, 82, 122, 0.20);
+        flex-shrink: 0;
+    }
+
+    .whisper-header h1 {
         font-family: 'Fredoka', sans-serif !important;
         font-weight: 600 !important;
         color: #C9527A !important;
-        text-align: center;
+        margin: 0 !important;
         letter-spacing: -0.5px;
-        margin-bottom: 0 !important;
     }
 
     .whisper-tagline {
@@ -64,6 +92,7 @@ st.markdown("""
         border-radius: 4px;
     }
 
+    /* Chat bubbles */
     [data-testid="stChatMessage"] {
         background-color: #FFFFFF;
         border: 1px solid #F7DCE6;
@@ -73,7 +102,7 @@ st.markdown("""
         box-shadow: 0 3px 10px rgba(201, 82, 122, 0.06);
     }
 
-    /* Fix: force readable text color inside bubbles */
+    /* Force readable text color inside bubbles — this was the white-on-white bug */
     [data-testid="stChatMessage"] p,
     [data-testid="stChatMessage"] li,
     [data-testid="stChatMessage"] span,
@@ -90,6 +119,7 @@ st.markdown("""
         border: 1px solid #F5C6D6 !important;
     }
 
+    /* Chat input */
     [data-testid="stChatInput"] {
         border-radius: 26px !important;
         border: 1.5px solid #F3C3D5 !important;
@@ -104,6 +134,7 @@ st.markdown("""
         color: #D9A0B4 !important;
     }
 
+    /* Source citation badge */
     .source-badge {
         display: inline-block;
         margin-top: 10px;
@@ -116,20 +147,26 @@ st.markdown("""
         font-weight: 700;
     }
 
+    /* Expander (sources list) */
     [data-testid="stExpander"] {
         border: 1px solid #F5C6D6 !important;
         border-radius: 14px !important;
         background-color: #FFFBFC !important;
     }
 
+    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-thumb { background: #F3C3D5; border-radius: 8px; }
     </style>
 """, unsafe_allow_html=True)
 
 # ---------- HEADER ----------
-st.markdown("<div style='text-align:center; font-size:34px;'>🎀</div>", unsafe_allow_html=True)
-st.title("Whisper Circle")
+st.markdown("""
+    <div class="whisper-header">
+        <div class="whisper-logo">🎀</div>
+        <h1>Whisper Circle</h1>
+    </div>
+""", unsafe_allow_html=True)
 st.markdown("<p class='whisper-tagline'>a gentle space for the questions you've never asked out loud</p>", unsafe_allow_html=True)
 st.markdown("<div class='whisper-divider'></div>", unsafe_allow_html=True)
 
