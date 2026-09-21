@@ -15,84 +15,151 @@ st.set_page_config(
 # ---------- STYLING ----------
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka:wght@600;700&family=Nunito:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Nunito', sans-serif;
+    /* Keyframe Animations */
+    @keyframes floatAnimation {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-7px) rotate(2deg); }
+        100% { transform: translateY(0px) rotate(0deg); }
     }
 
-    /* Force background colors */
-    .stApp {
+    @keyframes pulseGlow {
+        0% { box-shadow: 0 0 20px rgba(232, 116, 154, 0.35); }
+        50% { box-shadow: 0 0 38px rgba(201, 82, 122, 0.6); }
+        100% { box-shadow: 0 0 20px rgba(232, 116, 154, 0.35); }
+    }
+
+    @keyframes gradientShimmer {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Ambient Background Hue */
+    html, body, .stApp {
         background: 
-            radial-gradient(circle at 12% 8%, rgba(245, 198, 214, 0.55) 0%, transparent 40%),
-            radial-gradient(circle at 90% 15%, rgba(232, 116, 154, 0.18) 0%, transparent 45%),
-            radial-gradient(circle at 50% 100%, rgba(217, 168, 87, 0.10) 0%, transparent 50%),
-            #FFF8FA !important;
+            radial-gradient(circle at 15% 10%, rgba(248, 190, 212, 0.65) 0%, transparent 45%),
+            radial-gradient(circle at 85% 20%, rgba(232, 116, 154, 0.30) 0%, transparent 50%),
+            radial-gradient(circle at 50% 95%, rgba(247, 212, 180, 0.25) 0%, transparent 50%),
+            #FFF5F8 !important;
     }
 
     [data-testid="stHeader"] {
-        box-shadow: none !important;
-        border-bottom: none !important;
         background: transparent !important;
+        box-shadow: none !important;
     }
 
-    /* Amplified Logo + Title */
-    .whisper-header {
-        display: flex;
+    /* Glassmorphism Hero Card */
+    .whisper-hero-card {
+        background: rgba(255, 255, 255, 0.78);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1.5px solid rgba(245, 198, 214, 0.7);
+        border-radius: 32px;
+        padding: 32px 20px 26px 20px;
+        text-align: center;
+        margin: 5px auto 30px auto;
+        box-shadow: 0 16px 40px rgba(201, 82, 122, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.9);
+    }
+
+    /* SDG Hackathon Pill Badge */
+    .whisper-badge {
+        display: inline-flex;
         align-items: center;
-        justify-content: center;
-        gap: 18px;
-        margin-top: 10px;
+        gap: 6px;
+        background: linear-gradient(135deg, #FFE8F0, #FAD0DD);
+        border: 1px solid #F3B6C8;
+        color: #B8325E;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 700;
+        font-size: 11px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        padding: 5px 16px;
+        border-radius: 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 3px 10px rgba(201, 82, 122, 0.12);
+    }
+
+    /* Floating Logo Container */
+    .whisper-logo-wrapper {
+        display: inline-block;
+        position: relative;
+        animation: floatAnimation 4s ease-in-out infinite;
+        margin-bottom: 6px;
     }
 
     .whisper-logo {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #FBE4EC, #F3B6C8);
+        background: linear-gradient(135deg, #FFE3EC 0%, #F3A8BD 50%, #E8749A 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 42px;
-        box-shadow: 0 4px 15px rgba(201, 82, 122, 0.25);
-        flex-shrink: 0;
+        font-size: 46px;
+        border: 3.5px solid #FFFFFF;
+        animation: pulseGlow 3s infinite;
     }
 
-    .whisper-header h1 {
+    /* Bold Multi-Tone Shimmer Title */
+    .whisper-title {
         font-family: 'Fredoka', sans-serif !important;
         font-weight: 700 !important;
-        font-size: 3.5rem !important;
-        color: #C9527A !important;
-        margin: 0 !important;
-        letter-spacing: -1px;
+        font-size: 4.2rem !important;
+        line-height: 1.1 !important;
+        margin: 6px 0 4px 0 !important;
+        letter-spacing: -1.5px;
+        background: linear-gradient(120deg, #A8244E 0%, #E85D88 35%, #C9527A 70%, #8C1C3E 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShimmer 5s ease infinite;
+        filter: drop-shadow(0 4px 10px rgba(201, 82, 122, 0.15));
     }
 
+    /* Vibrant Tagline Quote */
     .whisper-tagline {
-        text-align: center;
         font-family: 'Caveat', cursive !important;
-        color: #A9738A;
-        font-weight: 600;
-        font-size: 36px; /* Increased for better visibility */
-        margin-top: -5px;
-        margin-bottom: 22px;
+        color: #8C3B5C !important;
+        font-weight: 700 !important;
+        font-size: 34px !important;
+        line-height: 1.2 !important;
+        margin: 8px auto 16px auto !important;
+        max-width: 620px;
+        letter-spacing: 0.3px;
     }
 
-    .whisper-divider {
-        height: 4px;
-        width: 80px;
-        margin: 0 auto 30px auto;
-        background: linear-gradient(90deg, #F0AFC4, #E8749A, #F0AFC4);
-        border-radius: 4px;
+    /* Divider with Center Accent */
+    .whisper-divider-custom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 10px;
     }
 
-    /* Chat bubbles */
+    .whisper-divider-line {
+        height: 2px;
+        width: 70px;
+        background: linear-gradient(90deg, transparent, #E8749A, transparent);
+        border-radius: 2px;
+    }
+
+    .whisper-divider-icon {
+        font-size: 14px;
+        color: #E8749A;
+    }
+
+    /* Chat Messages Styling */
     [data-testid="stChatMessage"] {
-        background-color: #FFFFFF;
-        border: 1px solid #F7DCE6;
-        border-radius: 20px;
-        padding: 14px 18px;
-        margin-bottom: 14px;
-        box-shadow: 0 3px 10px rgba(201, 82, 122, 0.06);
+        background-color: #FFFFFF !important;
+        border: 1px solid #F7DCE6 !important;
+        border-radius: 22px !important;
+        padding: 16px 20px !important;
+        margin-bottom: 14px !important;
+        box-shadow: 0 4px 15px rgba(201, 82, 122, 0.05) !important;
     }
 
     [data-testid="stChatMessage"] p, 
@@ -100,6 +167,7 @@ st.markdown("""
     [data-testid="stChatMessage"] span, 
     [data-testid="stChatMessage"] div {
         color: #5A3547 !important;
+        font-size: 16px !important;
     }
 
     [data-testid="stChatMessageAvatarUser"] {
@@ -108,43 +176,29 @@ st.markdown("""
 
     [data-testid="stChatMessageAvatarAssistant"] {
         background: linear-gradient(135deg, #FFFFFF, #FBE4EC) !important;
-        border: 1px solid #F5C6D6 !important;
+        border: 1.5px solid #F5C6D6 !important;
     }
 
-    /* Clean Chat Input */
+    /* Chat Input Bar */
     [data-testid="stChatInput"] {
-        border-radius: 26px !important;
+        border-radius: 28px !important;
         border: 2px solid #F3C3D5 !important;
-        box-shadow: 0 4px 14px rgba(201, 82, 122, 0.10) !important;
+        box-shadow: 0 6px 20px rgba(201, 82, 122, 0.12) !important;
         background-color: #FFFFFF !important;
     }
 
     [data-testid="stChatInput"] textarea {
         color: #5A3547 !important;
-        background-color: transparent !important;
+        font-size: 15px !important;
     }
 
     [data-testid="stChatInput"] textarea::placeholder {
-        color: #D9A0B4 !important;
+        color: #C28299 !important;
     }
 
-    /* Source citation badge */
-    .source-badge {
-        display: inline-block;
-        margin-top: 10px;
-        font-size: 12px;
-        color: #C9527A;
-        background: #FDF0F5;
-        border: 1px solid #F5C6D6;
-        padding: 4px 12px;
-        border-radius: 12px;
-        font-weight: 700;
-    }
-
-    /* Expander */
     [data-testid="stExpander"] {
         border: 1px solid #F5C6D6 !important;
-        border-radius: 14px !important;
+        border-radius: 16px !important;
         background-color: #FFFBFC !important;
     }
 
@@ -155,13 +209,23 @@ st.markdown("""
 
 # ---------- HEADER ----------
 st.markdown("""
-    <div class="whisper-header">
-        <div class="whisper-logo">🎀</div>
-        <h1>Whisper Circle</h1>
+    <div class="whisper-hero-card">
+        <div class="whisper-badge">
+            ✨ UN SDG 3 & 5 • Female Health Space ✨
+        </div>
+        <br>
+        <div class="whisper-logo-wrapper">
+            <div class="whisper-logo">🎀</div>
+        </div>
+        <h1 class="whisper-title">Whisper Circle</h1>
+        <p class="whisper-tagline">“a gentle space for the questions you've never asked out loud”</p>
+        <div class="whisper-divider-custom">
+            <div class="whisper-divider-line"></div>
+            <div class="whisper-divider-icon">🌸</div>
+            <div class="whisper-divider-line"></div>
+        </div>
     </div>
 """, unsafe_allow_html=True)
-st.markdown("<p class='whisper-tagline'>a gentle space for the questions you've never asked out loud</p>", unsafe_allow_html=True)
-st.markdown("<div class='whisper-divider'></div>", unsafe_allow_html=True)
 
 # ---------- GROQ CLIENT ----------
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
