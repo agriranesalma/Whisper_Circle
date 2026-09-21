@@ -56,11 +56,12 @@ st.markdown("""
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
         border: 1.5px solid rgba(245, 198, 214, 0.7);
-        border-radius: 32px;
-        padding: 32px 20px 26px 20px;
+        border-radius: 26px;
+        padding: 20px 20px 16px 20px;
         text-align: center;
-        margin: 5px auto 30px auto;
-        box-shadow: 0 16px 40px rgba(201, 82, 122, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.9);
+        margin: 0 auto 20px auto;
+        max-width: 680px;
+        box-shadow: 0 12px 30px rgba(201, 82, 122, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.9);
     }
 
     /* SDG Hackathon Pill Badge */
@@ -73,13 +74,13 @@ st.markdown("""
         color: #B8325E;
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 700;
-        font-size: 11px;
-        letter-spacing: 1.2px;
+        font-size: 10px;
+        letter-spacing: 1px;
         text-transform: uppercase;
-        padding: 5px 16px;
-        border-radius: 20px;
-        margin-bottom: 16px;
-        box-shadow: 0 3px 10px rgba(201, 82, 122, 0.12);
+        padding: 3px 12px;
+        border-radius: 16px;
+        margin-bottom: 8px;
+        box-shadow: 0 2px 8px rgba(201, 82, 122, 0.10);
     }
 
     /* Floating Logo Container */
@@ -87,48 +88,48 @@ st.markdown("""
         display: inline-block;
         position: relative;
         animation: floatAnimation 4s ease-in-out infinite;
-        margin-bottom: 6px;
+        margin-bottom: 2px;
     }
 
     .whisper-logo {
-        width: 90px;
-        height: 90px;
+        width: 68px;
+        height: 68px;
         border-radius: 50%;
         background: linear-gradient(135deg, #FFE3EC 0%, #F3A8BD 50%, #E8749A 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 46px;
-        border: 3.5px solid #FFFFFF;
+        font-size: 34px;
+        border: 2.5px solid #FFFFFF;
         animation: pulseGlow 3s infinite;
     }
 
-    /* Bold Multi-Tone Shimmer Title */
+    /* Multi-Tone Title */
     .whisper-title {
         font-family: 'Fredoka', sans-serif !important;
         font-weight: 700 !important;
-        font-size: 4.2rem !important;
+        font-size: 3.2rem !important;
         line-height: 1.1 !important;
-        margin: 6px 0 4px 0 !important;
-        letter-spacing: -1.5px;
+        margin: 2px 0 2px 0 !important;
+        letter-spacing: -1px;
         background: linear-gradient(120deg, #A8244E 0%, #E85D88 35%, #C9527A 70%, #8C1C3E 100%);
         background-size: 200% auto;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         animation: gradientShimmer 5s ease infinite;
-        filter: drop-shadow(0 4px 10px rgba(201, 82, 122, 0.15));
+        filter: drop-shadow(0 3px 8px rgba(201, 82, 122, 0.12));
     }
 
-    /* Vibrant Tagline Quote */
+    /* Tagline Quote */
     .whisper-tagline {
         font-family: 'Caveat', cursive !important;
         color: #8C3B5C !important;
         font-weight: 700 !important;
-        font-size: 34px !important;
+        font-size: 26px !important;
         line-height: 1.2 !important;
-        margin: 8px auto 16px auto !important;
-        max-width: 620px;
-        letter-spacing: 0.3px;
+        margin: 4px auto 10px auto !important;
+        max-width: 540px;
+        letter-spacing: 0.2px;
     }
 
     /* Divider with Center Accent */
@@ -136,19 +137,19 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
-        margin-top: 10px;
+        gap: 10px;
+        margin-top: 6px;
     }
 
     .whisper-divider-line {
         height: 2px;
-        width: 70px;
+        width: 50px;
         background: linear-gradient(90deg, transparent, #E8749A, transparent);
         border-radius: 2px;
     }
 
     .whisper-divider-icon {
-        font-size: 14px;
+        font-size: 12px;
         color: #E8749A;
     }
 
