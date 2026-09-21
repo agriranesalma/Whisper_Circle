@@ -28,7 +28,16 @@ st.markdown("""
             #FFF8FA;
     }
 
-    /* Title */
+    /* Fix: top toolbar and bottom input bar are separate containers */
+    [data-testid="stHeader"] {
+        background: transparent !important;
+    }
+
+    [data-testid="stBottomBlockContainer"],
+    [data-testid="stBottom"] {
+        background: #FFF8FA !important;
+    }
+
     h1 {
         font-family: 'Fredoka', sans-serif !important;
         font-weight: 600 !important;
@@ -55,7 +64,6 @@ st.markdown("""
         border-radius: 4px;
     }
 
-    /* Chat bubbles */
     [data-testid="stChatMessage"] {
         background-color: #FFFFFF;
         border: 1px solid #F7DCE6;
@@ -63,6 +71,14 @@ st.markdown("""
         padding: 14px 18px;
         margin-bottom: 14px;
         box-shadow: 0 3px 10px rgba(201, 82, 122, 0.06);
+    }
+
+    /* Fix: force readable text color inside bubbles */
+    [data-testid="stChatMessage"] p,
+    [data-testid="stChatMessage"] li,
+    [data-testid="stChatMessage"] span,
+    [data-testid="stChatMessage"] div {
+        color: #5A3547 !important;
     }
 
     [data-testid="stChatMessageAvatarUser"] {
@@ -74,18 +90,20 @@ st.markdown("""
         border: 1px solid #F5C6D6 !important;
     }
 
-    /* Chat input */
     [data-testid="stChatInput"] {
         border-radius: 26px !important;
         border: 1.5px solid #F3C3D5 !important;
         box-shadow: 0 4px 14px rgba(201, 82, 122, 0.10) !important;
     }
 
+    [data-testid="stChatInput"] textarea {
+        color: #5A3547 !important;
+    }
+
     [data-testid="stChatInput"] textarea::placeholder {
         color: #D9A0B4 !important;
     }
 
-    /* Source citation badge */
     .source-badge {
         display: inline-block;
         margin-top: 10px;
@@ -98,14 +116,12 @@ st.markdown("""
         font-weight: 700;
     }
 
-    /* Expander (sources list) */
     [data-testid="stExpander"] {
         border: 1px solid #F5C6D6 !important;
         border-radius: 14px !important;
         background-color: #FFFBFC !important;
     }
 
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-thumb { background: #F3C3D5; border-radius: 8px; }
     </style>
