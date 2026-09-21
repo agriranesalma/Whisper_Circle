@@ -61,3 +61,9 @@ Source: https://mcpress.mayoclinic.org/women-health/vaginal-discharge-when-to-wa
 Q: Can washing my underwear with strong detergent or fabric softener cause irritation?
 A: Yes. Fragrances, dyes, and softeners in laundry products can irritate sensitive vulvar skin. If you experience recurring irritation, try washing underwear separately in a mild, fragrance-free detergent, and avoid bleach and fabric softener on that laundry load.
 Source: https://mcpress.mayoclinic.org/women-health/vaginal-discharge-when-to-watch-when-to-work-up/
+
+---
+
+Q: How often to change my pad?
+A: It is highly recommended to change your sanitary pad every 4 to 8 hours, even if your flow is light. Changing it regularly is crucial because it helps prevent leaks, keeps you feeling fresh, and prevents the buildup of bacteria which can lead to unwanted odors or infections. On days when your flow is heavier—usually the first day or two of your period—you will likely need to change it more frequently, about every 2 to 4 hours. A good general rule is to change your pad whenever it feels wet, heavy, or uncomfortable.  Always remember to wash your hands with soap and water both before and after changing your pad to maintain good hygiene.
+Source: https://health.clevelandclinic.org/sanitary-pads
