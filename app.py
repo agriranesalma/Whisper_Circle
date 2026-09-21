@@ -153,6 +153,23 @@ st.markdown("""
         color: #E8749A;
     }
 
+    /* Sub-question pill styling */
+    .stButton > button {
+        border-radius: 20px !important;
+        border: 1px solid #F3C3D5 !important;
+        background-color: #FFFFFF !important;
+        color: #5A3547 !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+
+    .stButton > button:hover {
+        background-color: #FFE8F0 !important;
+        border-color: #E8749A !important;
+        color: #A8244E !important;
+        transform: translateY(-2px);
+    }
+
     /* Chat Messages Styling */
     [data-testid="stChatMessage"] {
         background-color: #FFFFFF !important;
@@ -228,10 +245,58 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+# ---------- TOPIC & QUESTION SELECTION ----------
+if "active_category" not in st.session_state:
+    st.session_state["active_category"] = None
+
+st.markdown("<p style='text-align: center; color: #A9738A; font-weight: 700; font-size: 14px; margin-bottom: 8px;'>Tap a topic to reveal common questions:</p>", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    if st.button("🩸 Period Cycles", use_container_width=True):
+        st.session_state["active_category"] = "period" if st.session_state["active_category"] != "period" else None
+with col2:
+    if st.button("🌸 Hygiene Myths", use_container_width=True):
+        st.session_state["active_category"] = "hygiene" if st.session_state["active_category"] != "hygiene" else None
+with col3:
+    if st.button("✨ Puberty Changes", use_container_width=True):
+        st.session_state["active_category"] = "puberty" if st.session_state["active_category"] != "puberty" else None
+
+questions_map = {
+    "period": [
+        "How long is a normal menstrual cycle?",
+        "Is severe cramping during my period normal or a sign of something else?",
+        "Why is my period late or irregular?",
+        "What is the difference between light spotting and a real period?"
+    ],
+    "hygiene": [
+        "Do I need special feminine soap or washes to clean intimate areas?",
+        "How often should I change pads or tampons safely?",
+        "Is daily vaginal discharge normal, and what color should it be?",
+        "What causes unexpected strong odors and how do I prevent them?"
+    ],
+    "puberty": [
+        "Is it normal to have irregular periods when first starting puberty?",
+        "At what age does puberty usually start and stop?",
+        "What are early signs that my first period is coming soon?",
+        "How do I manage sudden hormonal mood swings during puberty?"
+    ]
+}
+
+user_selected_prompt = None
+selected_category = st.session_state.get("active_category")
+
+if selected_category in questions_map:
+    st.markdown("<p style='text-align:center; color: #8C3B5C; font-weight:700; font-size: 13px; margin-top: 12px; margin-bottom: 6px;'>Choose a question to ask:</p>", unsafe_allow_html=True)
+    
+    q_cols = st.columns(2)
+    for idx, q_text in enumerate(questions_map[selected_category]):
+        with q_cols[idx % 2]:
+            if st.button(f"💬 {q_text}", key=f"q_{selected_category}_{idx}", use_container_width=True):
+                user_selected_prompt = q_text
 
 # ---------- GROQ CLIENT ----------
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
-
 
 def extract_content(stream):
     for chunk in stream:
@@ -239,8 +304,6 @@ def extract_content(stream):
         if delta.content:
             yield delta.content
 
-
-# ---------- BUILD / LOAD RAG KNOWLEDGE BASE ----------
 @st.cache_resource
 def get_collection():
     chroma_client = chromadb.PersistentClient(path="./my_chromadb_data")
@@ -275,7 +338,6 @@ def get_collection():
 
     return collection
 
-
 collection = get_collection()
 
 # ---------- SESSION STATE ----------
@@ -284,25 +346,6 @@ if "groq_model" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-
-# Sample question chips
-st.markdown("<p style='text-align: center; color: #A9738A; font-weight: 600; font-size: 14px; margin-bottom: 8px;'>Try asking about:</p>", unsafe_allow_html=True)
-
-col1, col2, col3 = st.columns(3)
-with col1:
-    if st.button("🩸 Period Cycles", use_container_width=True):
-        st.session_state["preset_query"] = "How long is a normal menstrual cycle?"
-with col2:
-    if st.button("🌸 Hygiene Myths", use_container_width=True):
-        st.session_state["preset_query"] = "Do I need special soap to clean my vagina?"
-with col3:
-    if st.button("✨ Puberty Changes", use_container_width=True):
-        st.session_state["preset_query"] = "Is it normal to have irregular periods at first?"
-
-# Handle preset queries
-if "preset_query" in st.session_state and st.session_state["preset_query"]:
-    prompt = st.session_state.pop("preset_query")
-    # Feed prompt directly into chat input handling logic
 # ---------- DISPLAY CHAT HISTORY ----------
 for message in st.session_state.messages:
     avatar = "💌" if message["role"] == "user" else "🌸"
@@ -310,12 +353,14 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # ---------- HANDLE NEW INPUT ----------
-if prompt := st.chat_input("Ask something, freely..."):
+chat_input_val = st.chat_input("Ask something, freely...")
+prompt = chat_input_val or user_selected_prompt
+
+if prompt:
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user", avatar="💌"):
         st.markdown(prompt)
 
-    # Retrieval step
     results = collection.query(query_texts=[prompt], n_results=3)
     retrieved_chunks = results["documents"][0]
     retrieved_sources = [m["source"] for m in results["metadatas"][0]]
