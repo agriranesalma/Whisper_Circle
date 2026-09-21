@@ -228,6 +228,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
+
 # ---------- GROQ CLIENT ----------
 client = Groq(api_key=st.secrets["GROQ_API_KEY"])
 
@@ -283,6 +284,25 @@ if "groq_model" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+
+# Sample question chips
+st.markdown("<p style='text-align: center; color: #A9738A; font-weight: 600; font-size: 14px; margin-bottom: 8px;'>Try asking about:</p>", unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns(3)
+with col1:
+    if st.button("🩸 Period Cycles", use_container_width=True):
+        st.session_state["preset_query"] = "How long is a normal menstrual cycle?"
+with col2:
+    if st.button("🌸 Hygiene Myths", use_container_width=True):
+        st.session_state["preset_query"] = "Do I need special soap to clean my vagina?"
+with col3:
+    if st.button("✨ Puberty Changes", use_container_width=True):
+        st.session_state["preset_query"] = "Is it normal to have irregular periods at first?"
+
+# Handle preset queries
+if "preset_query" in st.session_state and st.session_state["preset_query"]:
+    prompt = st.session_state.pop("preset_query")
+    # Feed prompt directly into chat input handling logic
 # ---------- DISPLAY CHAT HISTORY ----------
 for message in st.session_state.messages:
     avatar = "💌" if message["role"] == "user" else "🌸"
