@@ -264,22 +264,22 @@ with col3:
 
 questions_map = {
     "period": [
-        "How long is a normal menstrual cycle?",
-        "Is severe cramping during my period normal or a sign of something else?",
-        "Why is my period late or irregular?",
-        "What is the difference between light spotting and a real period?"
+        "how long is a period supposed to last?",
+        "my cramps are so bad i cant function is that normal?",
+        "im 15 and havent gotten my period yet is that bad?",
+        "whats pms and why do i feel like a different person before my period?"
     ],
     "hygiene": [
-        "Do I need special feminine soap or washes to clean intimate areas?",
-        "How often should I change pads or tampons safely?",
-        "Is daily vaginal discharge normal, and what color should it be?",
-        "What causes unexpected strong odors and how do I prevent them?"
+        "do i need special soap to wash down there?",
+        "is douching okay to do?",
+        "how often do i actually need to change my pad?",
+        "why does my discharge change throughout the month?",
     ],
-    "puberty": [
-        "Is it normal to have irregular periods when first starting puberty?",
-        "At what age does puberty usually start and stop?",
-        "What are early signs that my first period is coming soon?",
-        "How do I manage sudden hormonal mood swings during puberty?"
+    "Sexual well-being": [
+        "whats the actual best way to protect myself from stis",
+        "my boobs are different sizes is that normal?",
+        "what does consent actually mean in simple terms",
+        "does the pill protect me from stis too"
     ]
 }
 
