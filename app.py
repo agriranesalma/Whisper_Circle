@@ -259,8 +259,8 @@ with col2:
     if st.button("🌸 Hygiene Myths", use_container_width=True):
         st.session_state["active_category"] = "hygiene" if st.session_state["active_category"] != "hygiene" else None
 with col3:
-    if st.button("✨ Puberty Changes", use_container_width=True):
-        st.session_state["active_category"] = "puberty" if st.session_state["active_category"] != "puberty" else None
+    if st.button("✨ Sexual well-being", use_container_width=True):
+        st.session_state["active_category"] = "Sexual well-being" if st.session_state["active_category"] != "Sexual well-being" else None
 
 questions_map = {
     "period": [
